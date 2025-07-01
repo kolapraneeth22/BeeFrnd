@@ -14,11 +14,21 @@ import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore()
-  const { theme } = useThemeStore()
+  const { theme, initializeTheme } = useThemeStore();
+
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+  useEffect(() => {
+    if (theme) {
+      document.documentElement.setAttribute("data-theme", theme); // 🔥 Applies theme on load
+      console.log("Theme applied to HTML:", theme);
+    }
+  }, [theme]);
+
+
+
   
   console.log({ authUser, isCheckingAuth });
   
@@ -29,7 +39,7 @@ const App = () => {
       </div>
     );
   return (
-    <div data-theme={theme}>
+    <div>
       <Navbar />
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
