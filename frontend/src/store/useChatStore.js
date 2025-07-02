@@ -38,6 +38,9 @@ export const useChatStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
       set({ messages: [...messages, res.data] });
+      
+      // Refresh the users list to update the order based on latest message
+      get().getUsers();
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -56,6 +59,9 @@ export const useChatStore = create((set, get) => ({
       set({
         messages: [...get().messages, newMessage],
       });
+      
+      // Refresh the users list to update the order based on latest message
+      get().getUsers();
     });
   },
 

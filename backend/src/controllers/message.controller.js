@@ -4,12 +4,6 @@ import cloudinary from "../lib/cloudinary.js";
 import { getReceiverSocketId, io } from "../lib/socket.js";
 import { encryptMessage, decryptMessage } from "../lib/encryption.js";
 
-import User from "../models/user.models.js";
-import Message from "../models/message.model.js";
-import cloudinary from "../lib/cloudinary.js";
-import { getReceiverSocketId, io } from "../lib/socket.js";
-import { encryptMessage, decryptMessage } from "../lib/encryption.js";
-
 export const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
